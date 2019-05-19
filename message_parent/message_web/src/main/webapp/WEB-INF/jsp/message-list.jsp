@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <table class="easyui-datagrid" id="itemList" title="信息列表" 
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/list',method:'get',pageSize:30,toolbar:toolbar">
     <thead>
@@ -59,7 +60,6 @@
                             //UM.getEditor('itemeEditDescEditor').setContent(_data.data.messageDesc, false);
                             $("#itemeEditForm [name='myColumn']").html(_data.data.name);
                             $("#itemeEditForm [name='cid']").val(_data.data.id);
-                            alert("信息栏目表 id ======== "+_data.data.id);
                         }
                     });
         			// 加载信息描述
@@ -71,8 +71,11 @@
         			});
         			//回显图片
                     $.getJSON('/rest/item/query/item/image/'+data.id,function(_data){
-                    if(_data.data.messageAttachmentImage){
-                        $("#itemeEditForm [name='image']").after("<a href='"+_data.data.messageAttachmentImage+"' target='_blank'><img src='"+_data.data.messageAttachmentImage+"' width='80' height='50'/></a>");
+                        if (_data.status == 200) {
+                            var imgs = _data.data.images;
+                            $.each(imgs,function(index,value) {
+                                $("#itemeEditForm [name='image']").after("<a href='" + value.messageAttachmentImage + "' target='_blank'><img src='" + value.messageAttachmentImage + "' width='80' height='50'/></a>");
+                            })
                         }
                     });
         			E3.init({

@@ -1,11 +1,23 @@
 package com.zknsd.bean;
 
+import java.util.List;
+
 public class CheckMessageImage {
     private Long id;
 
     private String messageAttachmentImage;
 
     private String refMessageId;
+
+    private List<CheckMessageImage> images;
+
+    public List<CheckMessageImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<CheckMessageImage> images) {
+        this.images = images;
+    }
 
     public Long getId() {
         return id;

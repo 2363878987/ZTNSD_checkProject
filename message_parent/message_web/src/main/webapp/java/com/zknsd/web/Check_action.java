@@ -101,8 +101,9 @@ public class Check_action {
     @ResponseBody
     public MessageResult resultMessageImage(@PathVariable String id){
         List<CheckMessageImage> image = messageInterface.getImageByRef_Attachment_Id(id);
-
-        return MessageResult.ok(image);
+        CheckMessageImage checkMessageImage = new CheckMessageImage();
+        checkMessageImage.setImages(image);
+        return MessageResult.ok(checkMessageImage);
     }
     //修改窗口回显message_image 表中的图片地址
     @RequestMapping("/rest/item/query/item/column/{id}")

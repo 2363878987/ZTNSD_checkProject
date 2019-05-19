@@ -51,6 +51,7 @@ public class MessageInterface_Imp implements MessageInterface {
             String[] images = image.split(",");
             for (String img:images
                  ) {
+                img = img.substring(21,img.length());
                 messageImage.setMessageAttachmentImage(img);
                 messageImage.setRefMessageId(id);
                 imageMapper.insert(messageImage);
@@ -109,7 +110,12 @@ public class MessageInterface_Imp implements MessageInterface {
         CheckMessageImageExample messageImageExample= new CheckMessageImageExample();
         CheckMessageImageExample.Criteria criteria = messageImageExample.createCriteria();
         criteria.andRefMessageIdEqualTo(ref_attachment_id);
-        return imageMapper.selectByExample(messageImageExample);
+        List<CheckMessageImage> checkMessageImages = imageMapper.selectByExample(messageImageExample);
+        for (CheckMessageImage messageImage:checkMessageImages
+             ) {
+            messageImage.setMessageAttachmentImage("http://192.168.25.133"+messageImage.getMessageAttachmentImage());
+        }
+        return checkMessageImages;
     }
 
     @Override
@@ -149,30 +155,39 @@ public class MessageInterface_Imp implements MessageInterface {
         CheckMessageExample.Criteria criteria = messageExample.createCriteria();
         criteria.andIdEqualTo(message.getId());
         List<CheckMessage> checkMessages = messageMapper.selectByExample(messageExample);
-        for (CheckMessage checkMessage:checkMessages
-             ) {
+        for (CheckMessage checkMessage : checkMessages
+                ) {
             checkMessage.setUpdatetime(new Date());
             checkMessage.setDeleteStatus(true);
             checkMessage.setRefColumn(cid);
             checkMessage.setTitle(message.getTitle());
-            messageMapper.updateByExample(checkMessage,messageExample);
+            messageMapper.updateByExample(checkMessage, messageExample);
         }
         //修改content表
-        CheckMessageContent messageContent = new CheckMessageContent();
-        messageContent.setRefMessageId(message.getId());
-        messageContent.setMessageDesc(content);
-        contentMapper.updateMessageContent(messageContent);
+        CheckMessageContentExample messageContentExample = new CheckMessageContentExample();
+        CheckMessageContentExample.Criteria criteria1 = messageContentExample.createCriteria();
+        criteria1.andRefMessageIdEqualTo(message.getId());
+        List<CheckMessageContent> checkMessageContents = contentMapper.selectByExample(messageContentExample);
+        for (CheckMessageContent messageContent:checkMessageContents
+             ) {
+            messageContent.setMessageDesc(content);
+            messageContent.setUpdated(new Date());
+            contentMapper.updateByExample(messageContent,messageContentExample);
+        }
+
         //添加image表
-        CheckMessageImage messageImage = new CheckMessageImage();
-        String[] images = image.split(",");
-        for (String img:images
-                ) {
-            messageImage.setMessageAttachmentImage(img);
-            messageImage.setRefMessageId(message.getId());
-            imageMapper.insert(messageImage);
+        if (image != null && image != "") {
+            CheckMessageImage messageImage = new CheckMessageImage();
+            String[] images = image.split(",");
+            for (String img : images
+                    ) {
+                img = img.substring(21, img.length());
+                messageImage.setMessageAttachmentImage(img);
+                messageImage.setRefMessageId(message.getId());
+                imageMapper.insert(messageImage);
+            }
         }
     }
-
 
 
 }
