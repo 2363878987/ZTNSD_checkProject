@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="message_bean" />
+        <module name="message_common" />
+        <module name="message_interface" />
+        <module name="message_mapper" />
+        <module name="message_service" />
+        <module name="message_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="message_bean" target="1.7" />
+      <module name="message_common" target="1.7" />
+      <module name="message_interface" target="1.7" />
+      <module name="message_mapper" target="1.7" />
+      <module name="message_parent" target="1.5" />
+      <module name="message_service" target="1.7" />
+      <module name="message_web" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

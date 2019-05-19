@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/message_bean/message_bean.iml" filepath="$PROJECT_DIR$/message_bean/message_bean.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../message_common/message_common.iml" filepath="$PROJECT_DIR$/../message_common/message_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message_interface/message_interface.iml" filepath="$PROJECT_DIR$/message_interface/message_interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message_mapper/message_mapper.iml" filepath="$PROJECT_DIR$/message_mapper/message_mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message_parent.iml" filepath="$PROJECT_DIR$/message_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message_service/message_service.iml" filepath="$PROJECT_DIR$/message_service/message_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message_web/message_web.iml" filepath="$PROJECT_DIR$/message_web/message_web.iml" />
+    </modules>
+  </component>
+</project>
